@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" id="viewport"
+        content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0" />
+    <title>Minesweeper</title>
+    <link rel="manifest" href="minesweeper_manifest.json" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="icon" href="favicon.ico" />
+
+    <!-- PWA Stuff -->
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="images/mine_180.png" />
+    <meta name="theme-color" content="red" />
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker
+                .register("minesweeper_service_worker.js", {
+                    scope: "/minesweeper/"
+                })
+                .then(
+                    registration => {
+                        // console.log("ServiceWorker registration successful with scope: ", registration.scope);
+                    },
+                    err => {
+                        // console.log(err);
+                    }
+                );
+        }
+    </script>
+
+    <script src="js/minesweeper.js" type="module"></script>
+    <style>
+        .my-template {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="everything-holder">
+        <div id="controls-holder">
+            <div id="scorebar"></div>
+            <div id="num-left-frame">
+                <span>Remaining: <span id="num-left-display">-</span></span>
+            </div>
+            <div id="game-selector-holder">
+                <select id="level-select">
+                    <option value="easy" selected>Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="difficult">Difficult</option>
+                    <option value="jesus">Jeeeeesus</option>
+                </select>
+                <button id="start-button">Start</button>
+            </div>
+            <div id="timer-holder">0:00</div>
+        </div>
+        <div id="thing">
+            <div id="table-holder">
+                <div id="minefield-table">
+                    <div class="cell my-template">
+                        <span class="text-holder"></span>
+                        <img class="cell-img mine-img" src="images/mine_icon.png" />
+                        <img class="cell-img flag-img" src="images/flag_icon.png" />
+                    </div>
+                </div>
+                <div id="play-again-holder">
+                    <span id="play-again-button">Play again!</span>
+                </div>
+                <div id="pause-screen" class="pause-button">
+                    <img src="/minesweeper/images/sleeping.svg">
+                </div>
+
+            </div>
+            <div id="buttons-holder">
+                <div id="flag-button" class="control-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                        class="bi bi-flag-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"
+                            　 />
+                    </svg>
+                </div>
+                <div class="control-button pause-button">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                            class="bi bi-pause-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z" />
+                        </svg>
+                    </span>
+                </div>
+                <div id="mute-button" class="control-button">
+                    <svg id="muted-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                        class="mute-icon" viewBox="0 0 16 16">
+                        <path
+                            d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM6 5.04 4.312 6.39A.5.5 0 0 1 4 6.5H2v3h2a.5.5 0 0 1 .312.11L6 10.96V5.04zm7.854.606a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0z" />
+                    </svg>
+                    <svg id="unmuted-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                        class="mute-icon" viewBox="0 0 16 16">
+                        <path
+                            d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z" />
+                        <path
+                            d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z" />
+                        <path
+                            d="M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span class="explosion-ring my-template"></span>
+
+</body>
+
+</html>

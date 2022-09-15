@@ -1,0 +1,27 @@
+{
+    "name": "Das Mineshveeper",
+    "short_name": "Das Mineshveeper",
+    "description": "A minesweeper game for YOU!",
+    "icons": [{
+        "src": "/minesweeper/images/mine_64.png",
+        "sizes": "64x64",
+        "type": "image/png"
+    }, {
+        "src": "/minesweeper/images/mine_128.png",
+        "sizes": "128x128",
+        "type": "image/png"
+    }, {
+        "src": "/minesweeper/images/mine_256.png",
+        "sizes": "256x256",
+        "type": "image/png"
+    }, {
+        "src": "/minesweeper/images/mine_512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+    }],
+    "start_url": "/minesweeper/",
+    "display": "fullscreen",
+    "theme_color": "navy",
+    "background_color": "navy"
+}
